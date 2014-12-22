@@ -1,6 +1,9 @@
 /* Adres wskazuje na ostatnie podwojne slowo w pamieci SRAM.
  * STM32F103 maja 20kB SRAM.
  */
+#include "stm32f10x.h"
+#include "zl27arm_leds.h"
+
 #define STACK_POINTER 0x20004FFC
 
 #define RAMFUNC __attribute__ ((long_call, section (".ramsection")))
@@ -96,18 +99,6 @@ void (*const vector_table[]) (void) = {
 	0,
 	0,
 	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
 	SVCall_Handler,
 	DebugMonitor_Handler,
 	0,
@@ -195,6 +186,7 @@ void __attribute__((weak)) NMI_Handler(void)
 
 void __attribute__((weak)) HardFault_Handler(void)
 {
+	GPIO_WriteBit(LED1_PORT, LED8_PIN, Bit_SET);
 	while(1);
 }
 
@@ -251,18 +243,22 @@ void __attribute__((weak)) RCC_Handler(void){
 }
 
 void __attribute__((weak)) EXTI0_Handler(void){
+	GPIO_WriteBit(LED1_PORT, LED1_PIN, Bit_SET);
 	while(1);
 }
 
 void __attribute__((weak)) EXTI1_Handler(void){
+	GPIO_WriteBit(LED2_PORT, LED2_PIN, Bit_SET);
 	while(1);
 }
 
 void __attribute__((weak)) EXTI2_Hander(void){
+	GPIO_WriteBit(LED3_PORT, LED3_PIN, Bit_SET);
 	while(1);
 }
 
 void __attribute__((weak)) EXTI3_Hander(void){
+	GPIO_WriteBit(LED4_PORT, LED4_PIN, Bit_SET);
 	while(1);
 }
 
