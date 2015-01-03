@@ -14,7 +14,6 @@ static void disable_interrupts(void) {asm("cpsid i");}
  */
 void main(void) {
 
-	GPIO_InitTypeDef GPIO_InitStructure;
 	MCU_init();
 	while(1);
 }
