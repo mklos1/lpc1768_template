@@ -2,8 +2,7 @@
  * STM32F103 maja 20kB SRAM.
  */
 #include "stm32f10x.h"
-#include "zl27arm_leds.h"
-#include "zl27arm_buttons.h"
+
 
 #define STACK_POINTER 0x20004FFC
 
@@ -188,7 +187,6 @@ void __attribute__((weak)) NMI_Handler(void)
 
 void __attribute__((weak)) HardFault_Handler(void)
 {
-	GPIO_WriteBit(LED1_PORT, LED8_PIN, Bit_SET);
 	while(1);
 }
 
@@ -245,27 +243,19 @@ void __attribute__((weak)) RCC_Handler(void){
 }
 
 void __attribute__((weak)) EXTI0_Handler(void){
-	#ifdef ZL27ARM_SW0
-		zl27arm_SW0_interrupt();
-	#endif
+	while(1);
 }
 
 void __attribute__((weak)) EXTI1_Handler(void){
-	#ifdef ZL27ARM_SW1
-		zl27arm_SW1_interrupt();
-	#endif
+	while(1);
 }
 
 void __attribute__((weak)) EXTI2_Hander(void){
-	#ifdef ZL27ARM_SW2
-		zl27arm_SW2_interrupt();
-	#endif
+	while(1);
 }
 
 void __attribute__((weak)) EXTI3_Hander(void){
-	#ifdef ZL27ARM_SW3
-		zl27arm_SW3_interrupt();
-	#endif
+	while(1);
 }
 
 void __attribute__((weak)) EXTI4_Hander(void){
@@ -321,9 +311,6 @@ void __attribute__((weak)) CAN_SCE_Handler(void){
 }
 
 void __attribute__((weak)) EXTI95_Handler(void){
-	#ifdef ZL27ARM_JOY
-		void zl27arm_joy_enter_interrupt(void);
-	#endif
 	while(1);
 }
 

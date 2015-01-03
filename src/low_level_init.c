@@ -1,12 +1,9 @@
 #include "low_level_init.h"
 
 #include "stm32f10x.h"
-#include "zl27arm_leds.h"
-#include "zl27arm_buttons.h"
 
 void clocks_init(void);
 void interrupts_init(void);
-
 
 
 void MCU_init(void) {
@@ -15,9 +12,6 @@ void MCU_init(void) {
 	interrupts_init();
 
 	RCC_ClockSecuritySystemCmd(ENABLE);
-
-	zl27arm_leds_init();
-	zl27arm_buttons_init();
 
 }
 
