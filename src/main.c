@@ -1,5 +1,3 @@
-#include "stm32f10x.h"
-
 #include "low_level_init.h"
 
 static void enable_interrupts(void) {asm("cpsie i");}

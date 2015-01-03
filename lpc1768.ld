@@ -2,8 +2,10 @@ ENTRY (Reset_Handler)
 
 MEMORY
 {
-    RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 20K
-    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 128K
+    RAM1 (rwx) : ORIGIN = 0x10000000, LENGTH = 32K
+    RAM2 (rwx) : ORIGIN = 0x2007C000, LENGTH = 16K
+    RAM3 (rwx) : ORIGIN = 0x20080000, LENGTH = 16K
+    FLASH (rx)  : ORIGIN = 0x00000000, LENGTH = 512K
 }
 
 SECTIONS
@@ -34,7 +36,7 @@ SECTIONS
         *(.data.*)
         *(.ramsection)
         _data_end = .;
-    } >RAM
+    } >RAM1
 
     .bss :
     {
@@ -42,6 +44,6 @@ SECTIONS
     	_bss_start = .;
         *(.bss)       
         _bss_end = .;
-    } >RAM
+    } >RAM1
     
 }

@@ -1,10 +1,5 @@
-/* Adres wskazuje na ostatnie podwojne slowo w pamieci SRAM.
- * STM32F103 maja 20kB SRAM.
- */
-#include "stm32f10x.h"
 
-
-#define STACK_POINTER 0x20004FFC
+#define STACK_POINTER 0x10007FFC
 
 #define RAMFUNC __attribute__ ((long_call, section (".ramsection")))
 
@@ -20,65 +15,44 @@ void SVCall_Handler(void);
 void DebugMonitor_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
-void WWDG_Handler(void);
-void PVD_Handler(void);
-void Tamper_Handler(void);
+void WDG_Handler(void);
+void Timer0_Handler(void);
+void Timer1_Handler(void);
+void Timer2_Handler(void);
+void Timer3_Handler(void);
+void Uart0_Handler(void);
+void Uart1_Handler(void);
+void Uart2_Handler(void);
+void Uart3_Handler(void);
+void PWM1_Handler(void);
+void I2C0_Handler(void);
+void I2C1_Handler(void);
+void I2C2_Handler(void);
+void SPI_Handler(void);
+void SSP0_Handler(void);
+void SSP1_Handler(void);
+void PLL0_Handler(void);
 void RTC_Handler(void);
-void Flash_Handler(void);
-void RCC_Handler(void);
-void EXTI0_Handler(void);
-void EXTI1_Handler(void);
-void EXTI2_Hander(void);
-void EXTI3_Hander(void);
-void EXTI4_Hander(void);
-void DMA1_CH1_Handler(void);
-void DMA1_CH2_Handler(void);
-void DMA1_CH3_Handler(void);
-void DMA1_CH4_Handler(void);
-void DMA1_CH5_Handler(void);
-void DMA1_CH6_Handler(void);
-void DMA1_CH7_Handler(void);
-void ADC12_Handler(void);
-void USB_HP_CAN_TX_Handler(void);
-void USB_LP_CAN_RX0_Handler(void);
-void CAN_RX1_Handler(void);
-void CAN_SCE_Handler(void);
-void EXTI95_Handler(void);
-void TIM1_BRK_Handler(void);
-void TIM1_UP_Handler(void);
-void TIM1_TRG_COM_Handler(void);
-void TIM1_CC_Handler(void);
-void TIM2_Handler(void);
-void TIM3_Handler(void);
-void TIM4_Handler(void);
-void I2C1_EV_Handler(void);
-void I2C1_ER_Handler(void);
-void I2C2_EV_Handler(void);
-void I2C2_ER_Handler(void);
-void SPI1_Handler(void);
-void SPI2_Handler(void);
-void USART1_Handler(void);
-void USART2_Handler(void);
-void USART3_Handler(void);
-void EXTI1510_Handler(void);
-void RTCAlarm_Handler(void);
-void USBWakeup_Handler(void);
-void TIM8_BRK_Handler(void);
-void TIM8_UP_Handler(void);
-void TIM8_TRG_COM_Handler(void);
-void ADC3_Handler(void);
-void FSMC_Handler(void);
-void SDIO_Handler(void);
-void TIM5_Handler(void);
-void SPI3_Handler(void);
-void UART4_Handler(void);
-void UART5_Handler(void);
-void TIM6_Handler(void);
-void TIM7_Handler(void);
-void DMA2_CH1_Handler(void);
-void DMA2_CH2_Handler(void);
-void DMA2_CH3_Handler(void);
-void DMA2_CH45_Handler(void);
+void EINT0_Handler(void);
+void EINT1_Handler(void);
+void EINT2_Handler(void);
+void EINT3_Handler(void);
+void ADC_Handler(void);
+void BOD_Handler(void);
+void USB_Handler(void);
+void CAN_Handler(void);
+void GPDMA_Handler(void);
+void I2S_Handler(void);
+void ETH_Handler(void);
+void RIT_Handler(void);
+void ETH_Handler(void);
+void MCPWM_Handler(void);
+void QE_Handler(void);
+void PLL1_Handler(void);
+void ETH_Handler(void);
+void USBAI_Handler(void);
+void CANAI_Handler(void);
+
 
 extern unsigned int* _flash_data_start;
 extern unsigned int* _data_start;
@@ -104,65 +78,43 @@ void (*const vector_table[]) (void) = {
 	0,
 	PendSV_Handler,
 	SysTick_Handler,
-	WWDG_Handler,
-	PVD_Handler,
-	Tamper_Handler,
+	WDG_Handler,
+	Timer0_Handler,
+	Timer1_Handler,
+	Timer2_Handler,
+	Timer3_Handler,
+	Uart0_Handler,
+	Uart1_Handler,
+	Uart2_Handler,
+	Uart3_Handler,
+	PWM1_Handler,
+	I2C0_Handler,
+	I2C1_Handler,
+	I2C2_Handler,
+	SPI_Handler,
+	SSP0_Handler,
+	SSP0_Handler,
+	PLL0_Handler,
 	RTC_Handler,
-	Flash_Handler,
-	RCC_Handler,
-	EXTI0_Handler,
-	EXTI1_Handler,
-	EXTI2_Hander,
-	EXTI3_Hander,
-	EXTI4_Hander,
-	DMA1_CH1_Handler,
-	DMA1_CH2_Handler,
-	DMA1_CH3_Handler,
-	DMA1_CH4_Handler,
-	DMA1_CH5_Handler,
-	DMA1_CH6_Handler,
-	DMA1_CH7_Handler,
-	ADC12_Handler,
-	USB_HP_CAN_TX_Handler,
-	USB_LP_CAN_RX0_Handler,
-	CAN_RX1_Handler,
-	CAN_SCE_Handler,
-	EXTI95_Handler,
-	TIM1_BRK_Handler,
-	TIM1_UP_Handler,
-	TIM1_TRG_COM_Handler,
-	TIM1_CC_Handler,
-	TIM2_Handler,
-	TIM3_Handler,
-	TIM4_Handler,
-	I2C1_EV_Handler,
-	I2C1_ER_Handler,
-	I2C2_EV_Handler,
-	I2C2_ER_Handler,
-	SPI1_Handler,
-	SPI2_Handler,
-	USART1_Handler,
-	USART2_Handler,
-	USART3_Handler,
-	EXTI1510_Handler,
-	RTCAlarm_Handler,
-	USBWakeup_Handler,
-	TIM8_BRK_Handler,
-	TIM8_UP_Handler,
-	TIM8_TRG_COM_Handler,
-	ADC3_Handler,
-	FSMC_Handler,
-	SDIO_Handler,
-	TIM5_Handler,
-	SPI3_Handler,
-	UART4_Handler,
-	UART5_Handler,
-	TIM6_Handler,
-	TIM7_Handler,
-	DMA2_CH1_Handler,
-	DMA2_CH2_Handler,
-	DMA2_CH3_Handler,
-	DMA2_CH45_Handler,
+	EINT0_Handler,
+	EINT1_Handler,
+	EINT2_Handler,
+	EINT3_Handler,
+	ADC_Handler,
+	BOD_Handler,
+	USB_Handler,
+	CAN_Handler,
+	GPDMA_Handler,
+	I2S_Handler,
+	ETH_Handler,
+	RIT_Handler,
+	ETH_Handler,
+	MCPWM_Handler,
+	QE_Handler,
+	PLL1_Handler,
+	ETH_Handler,
+	USBAI_Handler,
+	CANAI_Handler,
 };
 
 void Reset_Handler(void)
@@ -177,7 +129,6 @@ void Reset_Handler(void)
 		*(ram++) = 0;
 	}
 	main();
-	NVIC_SystemReset(); //Soft-reset na wypadek, gdyby main() jednak wyszła
 }
 
 void __attribute__((weak)) NMI_Handler(void)
@@ -218,15 +169,71 @@ void __attribute__((weak)) SysTick_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) WWDG_Handler(void){
+void __attribute__((weak)) WDG_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) PVD_Handler(void){
+void __attribute__((weak)) Timer0_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) Tamper_Handler(void){
+void __attribute__((weak)) Timer1_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) Timer2_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) Timer3_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) Uart0_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) Uart1_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) Uart2_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) Uart3_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) PWM1_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) I2C0_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) I2C1_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) I2C2_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) SPI_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) SSP0_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) SSP1_Handler(void){
+	while(1);
+}
+
+void __attribute__((weak)) PLL0_Handler(void){
 	while(1);
 }
 
@@ -234,222 +241,71 @@ void __attribute__((weak)) RTC_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) Flash_Handler(void){
+void __attribute__((weak)) EINT0_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) RCC_Handler(void){
+void __attribute__((weak)) EINT1_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) EXTI0_Handler(void){
+void __attribute__((weak)) EINT2_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) EXTI1_Handler(void){
+void __attribute__((weak)) EINT3_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) EXTI2_Hander(void){
+void __attribute__((weak)) ADC_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) EXTI3_Hander(void){
+void __attribute__((weak)) BOD_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) EXTI4_Hander(void){
+void __attribute__((weak)) USB_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) DMA1_CH1_Handler(void){
+void __attribute__((weak)) CAN_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) DMA1_CH2_Handler(void){
+void __attribute__((weak)) GPDMA_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) DMA1_CH3_Handler(void){
+void __attribute__((weak)) I2S_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) DMA1_CH4_Handler(void){
+void __attribute__((weak)) ETH_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) DMA1_CH5_Handler(void){
+void __attribute__((weak)) RIT_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) DMA1_CH6_Handler(void){
+void __attribute__((weak)) MCPWM_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) DMA1_CH7_Handler(void){
+void __attribute__((weak)) QE_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) ADC12_Handler(void){
+void __attribute__((weak)) PLL1_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) USB_HP_CAN_TX_Handler(void){
+void __attribute__((weak)) USBAI_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) USB_LP_CAN_RX0_Handler(void){
+void __attribute__((weak)) CANAI_Handler(void){
 	while(1);
 }
 
-void __attribute__((weak)) CAN_RX1_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) CAN_SCE_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) EXTI95_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM1_BRK_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM1_UP_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM1_TRG_COM_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM1_CC_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM2_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM3_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM4_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) I2C1_EV_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) I2C1_ER_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) I2C2_EV_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) I2C2_ER_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) SPI1_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) SPI2_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) USART1_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) USART2_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) USART3_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) EXTI1510_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) RTCAlarm_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) USBWakeup_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM8_BRK_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM8_UP_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM8_TRG_COM_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) ADC3_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) FSMC_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) SDIO_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM5_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) SPI3_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) UART4_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) UART5_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM6_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) TIM7_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) DMA2_CH1_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) DMA2_CH2_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) DMA2_CH3_Handler(void){
-	while(1);
-}
-
-void __attribute__((weak)) DMA2_CH45_Handler(void){
-	while(1);
-}
